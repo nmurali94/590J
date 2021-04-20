@@ -1,0 +1,3 @@
+[submodule "attack_server/dnscat2"]
+	path = attack_server/dnscat2
+	url = https://github.com/iagox86/dnscat2
