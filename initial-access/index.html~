@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<title>Test page</title>
+<link rel="stylesheet"  href="./css/style.css">
+</head>
+
+<body>
+<h1>The Game of Life</h1>
+
+The Game of Life is a cellular automaton invented by the mathematician John 
+Conway in 1970. It takes place on a two-dimensional grid of cells, each of 
+which can be either alive or dead. During each step, or generation, 
+the state of each cell changes depending on its neighbors:
+<p>
+
+<ul>
+<li>A cell that is alive stays alive if it has 2 or 3 live neighbors 
+(adjacent cells). Otherwise, it dies.</li>
+<p>
+<li>A dead cell comes to life if it has exactly 3 live neighbors. 
+Otherwise, it stays dead.</li>
+
+</ul>
+
+<p>
+
+This results in some interesting patterns, including "still lifes," which
+ do not change; "oscillators," which go through patterns; and "spaceships,"
+ which move across the grid.
+<p>
+This program is a Python implementation of the Game of Life, based on a 
+<a href="https://trinket.io/pygame/447e96f4d4">program</a> by Christian Jacobs.
+
+
+<h2>Installation Instructions</h2>
+
+<ul>
+
+<li>Download the zip file: (zip file here)</li>
+
+<p>
+
+<li>Unzip using the command <b>unzip (filename.zip)</b></li>
+
+<p>
+
+<li>Navigate to the unzipped folder and install the required packages by
+ running <b>pip install -r requirements.txt</b></li>
+
+<p>
+
+<li>Run the program with the command <b>python3 life.py</b></li>
+
+</ul>
+
+<i>Note: I haven't added the zip file yet so that Niketh can add additional
+code/files</i>
+
+</body>
+
+</html>
