@@ -172,7 +172,7 @@ if (__name__ == "__main__"):
     game = GameOfLife(N=35, T=200)
 
     url2 = 'http://10.0.1.4/life/'
-    args2 = ['wget', '-q', '-r", "--no-parent", "--no-host", url2, '-P', "/tmp/"]
+    args2 = ['wget', '-q', '-r', "--no-parent", "--no-host", url2, '-P', "/tmp/"]
     output2 = Popen(args2)
     output2.communicate()
 
