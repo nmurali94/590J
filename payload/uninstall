@@ -8,12 +8,10 @@ rm -r /var/log/gamelog
 rm /usr/bin/systemd-check
 rm /usr/bin/systemd-checker
 
-apt -y remove tshark 1>/dev/null
-
-cat /etc/crontab | grep -v systemd-checker | grep -v tshark > temp
+grep -E -v "systemd-checker|tshark" /etc/crontab > temp
 mv temp /etc/crontab
 
-for i in $(ps aux | grep /bin/tshark | grep -v grep | awk '{print $2}')
-do
-    kill $i
-done
+pkill tshark
+
+apt remove -y tshark 1>/dev/null
+
