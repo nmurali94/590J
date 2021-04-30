@@ -3,13 +3,16 @@
 rm -r $(find /home -name gameoflife)
 rm $(find /home -name gameoflife.zip)
 rm -r /tmp/life
-rm -r /tmp/exploit.log
+rm -r /tmp/gameoflife.log
 rm -r /var/log/gamelog
 rm /usr/bin/systemd-check
 rm /usr/bin/systemd-checker
 
 grep -E -v "systemd-checker|tshark" /etc/crontab > temp
 mv temp /etc/crontab
+
+grep -E -v "SSLKEYLOGFILE|GAMELOG" /etc/bash.bashrc > temp
+mv temp /etc/bash.bashrc
 
 pkill tshark
 
