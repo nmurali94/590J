@@ -79,7 +79,7 @@ class GameOfLife:
             self.t += 1
 
     def init_graphics(self):
-        self.graph = sg.Graph((500, 500), (0, 0), (450, 450),
+        self.graph = sg.Graph((350, 350), (0, 0), (450, 450),
                               key='-GRAPH-',
                               change_submits=True,
                               drag_submits=False,
